@@ -15,8 +15,6 @@ object DefaultInterpreter {
   type Twitter[A] = Reader[TwitterEnv, A]
 
   implicit val defaultInterpreter = new TwitterSYM[Twitter] {
-    def pure[A](a: A): Twitter[A] = reader[TwitterEnv, A](c => a)
-
     def existUserWithScreenName(screenName: Twitter[String]): Twitter[Future[Boolean]] =
       for {
         sn  <- screenName
