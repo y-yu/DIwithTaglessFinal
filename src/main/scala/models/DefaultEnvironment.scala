@@ -11,11 +11,11 @@ import play.api.libs.ws.ning.NingWSClient
 object DefaultEnvironment {
   val config  = new NingAsyncHttpClientConfigBuilder(DefaultWSClientConfig()).build()
   val builder = new AsyncHttpClientConfig.Builder(config)
-  val client  = new NingWSClient(builder.build)
+  val c       = new NingWSClient(builder.build)
 
-  val defaultEnvironment = TwitterEnv(
-    client,
-    OAuthCalculator(
+  val defaultEnvironment = new UseWSClient with UseOAuthCred {
+    val client = c
+    val cred = OAuthCalculator(
       ConsumerKey(
         "key",
         "secret"
@@ -25,5 +25,5 @@ object DefaultEnvironment {
         "secret"
       )
     )
-  )
+  }
 }

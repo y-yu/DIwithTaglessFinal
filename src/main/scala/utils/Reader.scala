@@ -1,7 +1,5 @@
 package utils
 
-
-
 case class Reader[E, A](g: E => A) {
   def apply(e: E) = g(e)
   def run: E => A = apply
