@@ -53,11 +53,11 @@ object DefaultInterpreter {
       }
   }
 
-  def existUserWithScreenName(screenName: String)(implicit i: TwitterSYM[Twitter]): Twitter[Future[Boolean]] =
-    i.existUserWithScreenName(pure(screenName))
+  def existUserWithScreenName(screenName: Twitter[String])(implicit i: TwitterSYM[Twitter]): Twitter[Future[Boolean]] =
+    i.existUserWithScreenName(screenName)
 
-  def updateStatus(status: String)(implicit i: TwitterSYM[Twitter]): Twitter[Future[String]] =
-    i.updateStatus(pure(status))
+  def updateStatus(status: Twitter[String])(implicit i: TwitterSYM[Twitter]): Twitter[Future[String]] =
+    i.updateStatus(status)
 
   def condition[A](c: Twitter[Future[Boolean]], t: Twitter[A], e: Twitter[A])(implicit i: TwitterSYM[Twitter]): Twitter[Future[A]] =
     i.condition(c, t, e)
