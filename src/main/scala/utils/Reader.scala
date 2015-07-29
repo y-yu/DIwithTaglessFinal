@@ -16,5 +16,5 @@ object Reader {
 
   def local[E, A](f: E => E, c: Reader[E, A]): Reader[E, A] = Reader(e => c(f(e)))
 
-  def reader[E, A](f: E => A): Reader[E, A] = Reader(f)
+  implicit def reader[E, A](f: E => A): Reader[E, A] = Reader(f)
 }

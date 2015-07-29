@@ -15,31 +15,31 @@ object DefaultInterpreter {
   implicit val defaultInterpreter = new TwitterSYM[Twitter] {
     def existUserWithScreenName(screenName: Twitter[String]): Twitter[Boolean] =
       for {
-        sn  <- screenName
+        sn <- screenName
         env <- ask
       } yield {
         val res = Await.result(
-                    env.client.url("https://api.twitter.com/1.1/users/show.json")
-                      .withQueryString("screen_name" -> sn)
-                      .sign(env.cred)
-                      .get(),
-                    Duration.Inf
-                  )
+          env.client.url("https://api.twitter.com/1.1/users/show.json")
+            .withQueryString("screen_name" -> sn)
+            .sign(env.cred)
+            .get(),
+          Duration.Inf
+        )
 
         res.status == 200
       }
 
     def updateStatus(status: Twitter[String]): Twitter[String] =
       for {
-        s   <- status
+        s <- status
         env <- ask
       } yield {
         val res = Await.result(
-                    env.client.url("https://api.twitter.com/1.1/statuses/update.json")
-                      .sign(env.cred)
-                      .post(Map("status" -> Seq(s))),
-                    Duration.Inf
-                  )
+          env.client.url("https://api.twitter.com/1.1/statuses/update.json")
+            .sign(env.cred)
+            .post(Map("status" -> Seq(s))),
+          Duration.Inf
+        )
 
         (res.json \ "id_str").as[String]
       }
@@ -47,9 +47,9 @@ object DefaultInterpreter {
     def condition[A](cond: Twitter[Boolean], t: Twitter[A], e: Twitter[A]): Twitter[A] = {
       for {
         bool <- cond
-        env  <- ask
+        env <- ask
       } yield
-        if (bool) t(env) else e(env)
+      if (bool) t(env) else e(env)
     }
   }
 

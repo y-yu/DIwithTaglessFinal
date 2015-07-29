@@ -33,8 +33,4 @@ object TwitterRepository {
     client.url("https://api.twitter.com/1.1/statuses/update.json")
       .sign(OAuthCalculator(key, token))
       .post(Map("status" -> Seq(status)))
-
-  def close() = {
-    client.close()
-  }
 }
