@@ -3,7 +3,7 @@ package repositories
 import models.UseOAuthCred
 import models.UseWSClient
 import play.api.libs.ws.WSResponse
-import repositories.DefaultInterpreter.Twitter
+import repositories.TwitterSYMInterpreter.Twitter
 import utils.Reader
 import utils.Reader._
 

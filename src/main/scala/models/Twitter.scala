@@ -7,7 +7,7 @@ sealed trait Twitter[A]
 
 case class Fetch[A](screenName: String, next: WSResponse => A) extends Twitter[A]
 case class Update[A](status: String, next: A) extends Twitter[A]
-case class Delete[A](id: String, next: A) extends Twitter[A]
+//case class Delete[A](id: String, next: A) extends Twitter[A]
 
 object Twitter {
   implicit val twitterFunctor = new Functor[Twitter] {

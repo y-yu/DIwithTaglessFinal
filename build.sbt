@@ -9,3 +9,5 @@ libraryDependencies ++= Seq(
 )
 
 mainClass := Some("Main")
+
+scalacOptions += "-language:higherKinds"

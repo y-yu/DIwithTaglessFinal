@@ -1,12 +1,9 @@
 package repositories
 
 import models._
-import play.api.libs.ws.WSResponse
-import utils.Reader._
-import utils.{Reader, More, Done, Free}
 import repositories.TwitterRepositoryDI._
+import utils.{Done, Free, More}
 
-import scala.concurrent.Future
 import scala.concurrent.ExecutionContext.Implicits.global
 
 object TwitterInterpreter {
