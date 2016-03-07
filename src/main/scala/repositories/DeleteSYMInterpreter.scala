@@ -16,8 +16,8 @@ object DeleteSYMInterpreter {
         idStr <- id
         env   <- ask
       } yield {
-        var res = Await.result(
-          env.client.url(s"https://api.twitter.com/1.1/statuses/destroy/${idStr}.json")
+        val res = Await.result(
+          env.client.url(s"https://api.twitter.com/1.1/statuses/destroy/$idStr.json")
             .sign(env.cred)
             .post(Map("id" -> Seq(idStr))),
           Duration.Inf

@@ -1,16 +1,12 @@
 package repositories
 
-import models.UseOAuthCred
-import models.UseWSClient
+import models.{UseOAuthCred, UseWSClient}
 import play.api.libs.ws.WSResponse
-import repositories.TwitterSYMInterpreter.Twitter
 import utils.Reader
 import utils.Reader._
 
-import scala.concurrent.Await
-import scala.concurrent.Future
-import scala.concurrent.duration.Duration
 import scala.concurrent.ExecutionContext.Implicits.global
+import scala.concurrent.Future
 
 object TwitterRepositoryDI {
   def fetchUserByScreenName(screenName: String): Reader[UseWSClient with UseOAuthCred, Future[WSResponse]] =
